@@ -6,6 +6,8 @@ import android.widget.TextView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 // Fragment arguments
 private const val ARG_PARAM1 = "param1"
@@ -44,6 +46,12 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val coffeeId = arguments?.getInt(COFFEE_ID, 0) ?: 0
         setCoffeeData(coffeeId)
+
+        val backButton = view.findViewById<Button>(R.id.back_to_list_button)
+        backButton.setOnClickListener {
+            // If using Jetpack Navigation Component:
+            findNavController().popBackStack()
+        }
     }
 
     fun setCoffeeData(id: Int) {
@@ -60,8 +68,21 @@ class DetailFragment : Fragment() {
                 coffeeTitle?.text = getString(R.string.latte_title)
                 coffeeDesc?.text = getString(R.string.latte_desc)
             }
+            R.id.espresso -> {
+                coffeeTitle?.text = getString(R.string.espresso_title)
+                coffeeDesc?.text = getString(R.string.espresso_desc)
+            }
+            R.id.cappuccino -> {
+                coffeeTitle?.text = getString(R.string.cappuccino_title)
+                coffeeDesc?.text = getString(R.string.cappuccino_desc)
+            }
+            R.id.mocha -> {
+                coffeeTitle?.text = getString(R.string.mocha_title)
+                coffeeDesc?.text = getString(R.string.mocha_desc)
+            }
         }
     }
+
 
     companion object {
         private const val COFFEE_ID = "COFFEE_ID"
